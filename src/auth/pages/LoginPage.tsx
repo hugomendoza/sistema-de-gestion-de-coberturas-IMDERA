@@ -1,3 +1,8 @@
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod/v4'
+
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -8,14 +13,14 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { logoImdera } from '@/assets'
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
+  email: z.email({
+    message: 'Invalid email address.',
+  }),
+  password: z.string().min(1, {
+    message: 'Password is required.',
   }),
 })
 
@@ -23,35 +28,39 @@ export function LoginPage() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: '',
+      email: '',
+      password: '',
     },
   })
+
+  const navigate = useNavigate()
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
     form.reset()
+    navigate('/dashboard', { replace: true })
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <div className="w-11/12 max-w-xl rounded-2xl shadow-lg p-6">
-        <header className="space-y-4 text-center">
+      <div className="w-11/12 max-w-md rounded-2xl shadow-lg p-6">
+        <header className="space-y-4 text-center mb-8">
           <div className="mx-auto size-24">
             <img src={logoImdera} alt="Logo Imdera" />
           </div>
           <h1 className="text-3xl font-bold">Bienvenido</h1>
-          <p>Sign in to your account to continue</p>
+          <p>Ingresa a tu cuenta para continuar</p>
         </header>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
             <FormField
               control={form.control}
-              name="username"
+              name="email"
               render={(data) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Correo Eléctronico *</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...data.field} />
+                    <Input type="email" placeholder="user@imdera.com" {...data.field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -59,18 +68,20 @@ export function LoginPage() {
             />
             <FormField
               control={form.control}
-              name="username"
+              name="password"
               render={(data) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Contraseña *</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...data.field} />
+                    <Input type="password" placeholder="••••••••••" {...data.field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button className="text-slate-900 py-3 px-6 h-auto mx-auto block w-full" type="submit">
+              Ingresar
+            </Button>
           </form>
         </Form>
       </div>

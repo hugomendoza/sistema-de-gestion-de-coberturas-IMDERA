@@ -16,7 +16,7 @@ export function AppRouter() {
 
       {/* Redirects */}
       <Routes>
-        <Route path="*" element={<Navigate to="/auth/login" />} />
+        <Route path="/" element={<Navigate to="/auth/login" />} />
       </Routes>
     </BrowserRouter>
   )
