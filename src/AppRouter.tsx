@@ -1,22 +1,26 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { LoginPage } from './auth/pages/LoginPage'
-import { PromotorClassesPage } from './dashboard/pages/PromotorClassesPage'
+import { DashboardLayout } from './dashboard/layout/DashboardLayout'
+import { StatsPage } from './dashboard/pages/StatsPage'
+import { ClassesPage } from './dashboard/pages/ClassesPage'
 
 export function AppRouter() {
   return (
     <BrowserRouter>
-      {/* Auth Routes */}
       <Routes>
-        <Route index path="/auth/login" element={<LoginPage />} />
-      </Routes>
-      {/* Dashboard Routes */}
-      <Routes>
-        <Route path="/dashboard" element={<PromotorClassesPage />} />
-      </Routes>
+        {/* Auth Route */}
+        <Route path="/auth/login" element={<LoginPage />} />
+        
+        {/* Dashboard Routes */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<Navigate to="estadisticas" replace />} />
+          <Route path="estadisticas" element={<StatsPage />} />
+          <Route path="clases" element={<ClassesPage />} />
+        </Route>
 
-      {/* Redirects */}
-      <Routes>
-        <Route path="/" element={<Navigate to="/auth/login" />} />
+        {/* Redirects */}
+        <Route path="/" element={<Navigate to="/dashboard/estadisticas" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard/estadisticas" replace />} />
       </Routes>
     </BrowserRouter>
   )
