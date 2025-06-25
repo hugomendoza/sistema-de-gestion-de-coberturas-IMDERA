@@ -1,14 +1,45 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Activity, Users, BookOpen, UserCheck } from 'lucide-react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts'
+import { Users, BookOpen, UserCheck } from 'lucide-react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 // Datos de ejemplo para las estadísticas
 const statsData = [
-  { id: 1, title: 'Clases Totales', value: '24', icon: <BookOpen className="h-4 w-4 text-muted-foreground" /> },
-  { id: 2, title: 'Asistencia Promedio', value: '85%', icon: <UserCheck className="h-4 w-4 text-muted-foreground" /> },
-  { id: 3, title: 'Promotores Activos', value: '8', icon: <Users className="h-4 w-4 text-muted-foreground" /> },
-  { id: 4, title: 'Alumnos Registrados', value: '156', icon: <Users className="h-4 w-4 text-muted-foreground" /> },
-];
+  {
+    id: 1,
+    title: 'Clases Totales',
+    value: '24',
+    icon: <BookOpen className="h-4 w-4 text-muted-foreground" />,
+  },
+  {
+    id: 2,
+    title: 'Asistencia Promedio',
+    value: '85%',
+    icon: <UserCheck className="h-4 w-4 text-muted-foreground" />,
+  },
+  {
+    id: 3,
+    title: 'Promotores Activos',
+    value: '8',
+    icon: <Users className="h-4 w-4 text-muted-foreground" />,
+  },
+  {
+    id: 4,
+    title: 'Alumnos Registrados',
+    value: '156',
+    icon: <Users className="h-4 w-4 text-muted-foreground" />,
+  },
+]
 
 // Datos para el gráfico de barras
 const attendanceData = [
@@ -19,7 +50,7 @@ const attendanceData = [
   { name: 'Vie', asistencia: 85 },
   { name: 'Sáb', asistencia: 73 },
   { name: 'Dom', asistencia: 60 },
-];
+]
 
 // Datos para el gráfico de pastel
 const classDistribution = [
@@ -28,18 +59,16 @@ const classDistribution = [
   { name: 'Voleibol', value: 20 },
   { name: 'Atletismo', value: 15 },
   { name: 'Otros', value: 5 },
-];
+]
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
 
 export function StatsPage() {
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Panel de Estadísticas</h2>
-        <p className="text-muted-foreground">
-          Visualiza las métricas clave de la plataforma
-        </p>
+        <p className="text-muted-foreground">Visualiza las métricas clave de la plataforma</p>
       </div>
 
       {/* Tarjetas de métricas */}
@@ -47,12 +76,8 @@ export function StatsPage() {
         {statsData.map((stat) => (
           <Card key={stat.id}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                {stat.title}
-              </CardTitle>
-              <div className="h-4 w-4">
-                {stat.icon}
-              </div>
+              <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+              <div className="h-4 w-4">{stat.icon}</div>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
@@ -94,12 +119,12 @@ export function StatsPage() {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }) => `${name} ${(percent! * 100).toFixed(0)}%`}
                   outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {classDistribution.map((entry, index) => (
+                  {classDistribution.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
@@ -110,7 +135,7 @@ export function StatsPage() {
         </Card>
       </div>
     </div>
-  );
+  )
 }
 
-export default StatsPage;
+export default StatsPage
