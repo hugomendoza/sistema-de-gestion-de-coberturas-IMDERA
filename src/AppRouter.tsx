@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import { LoginPage } from './auth/pages/LoginPage'
 import { PromotorClassesPage } from './dashboard/pages/PromotorClassesPage'
+import { DashboardLayout } from './dashboard/layout/DashboardLayout'
 
 export function AppRouter() {
   return (
@@ -11,7 +12,9 @@ export function AppRouter() {
       </Routes>
       {/* Dashboard Routes */}
       <Routes>
-        <Route path="/dashboard" element={<PromotorClassesPage />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<PromotorClassesPage />} />
+        </Route>
       </Routes>
 
       {/* Redirects */}
