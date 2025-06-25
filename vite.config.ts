@@ -10,5 +10,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: '/sistema-de-gestion-de-coberturas-IMDERA/',
 })
