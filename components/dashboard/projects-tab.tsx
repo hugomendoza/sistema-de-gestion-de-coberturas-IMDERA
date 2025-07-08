@@ -19,6 +19,7 @@ import {
 import { mockProject } from '@/lib/mock-data';
 import { Class } from '@/lib/types';
 import { ClassDetailModal } from './class-detail-modal';
+import { AddUserModal } from './add-user-modal';
 
 const statusConfig = {
   'programada': {
@@ -47,8 +48,11 @@ const statusConfig = {
   }
 };
 
+
 export function ProjectsTab() {
   const [selectedClass, setSelectedClass] = useState<Class | null>(null);
+  const [showAddUser, setShowAddUser] = useState(false);
+  const [users, setUsers] = useState<any[]>([]); // mock users
   const project = mockProject;
 
   const handleClassClick = (classItem: Class) => {
@@ -57,6 +61,10 @@ export function ProjectsTab() {
 
   const handleCloseModal = () => {
     setSelectedClass(null);
+  };
+
+  const handleAddUser = (user: any) => {
+    setUsers((prev) => [...prev, user]);
   };
 
   return (
@@ -69,6 +77,9 @@ export function ProjectsTab() {
             Gestiona las clases y estudiantes de tus proyectos
           </p>
         </div>
+        <Button onClick={() => setShowAddUser(true)} variant="default">
+          Agregar Usuario
+        </Button>
       </div>
 
       {/* Project Overview */}
@@ -122,7 +133,6 @@ export function ProjectsTab() {
         {project.classes.map((classItem) => {
           const config = statusConfig[classItem.status];
           const StatusIcon = config.icon;
-          
           return (
             <Card 
               key={classItem.id} 
@@ -190,6 +200,14 @@ export function ProjectsTab() {
           onClose={handleCloseModal}
         />
       )}
+
+      {/* Add User Modal */}
+      <AddUserModal
+        isOpen={showAddUser}
+        onClose={() => setShowAddUser(false)}
+        onAdd={handleAddUser}
+        classes={project.classes.map(c => ({ id: c.id, name: c.name }))}
+      />
     </div>
   );
 }
