@@ -46,18 +46,6 @@ export function ProfileTab() {
     stress: data.stressLevel
   }));
 
-  // Configuración del tema para el gráfico
-  const chartConfig: ChartConfig = {
-    weight: {
-      label: 'Peso (kg)',
-      theme: 'primary',
-    },
-    bodyFat: {
-      label: '% Grasa Corporal',
-      theme: 'chart-1',
-    },
-  };
-
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">

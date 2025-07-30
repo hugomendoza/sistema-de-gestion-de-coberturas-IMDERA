@@ -6,7 +6,7 @@ export interface User {
   email: string;
   role: UserRole;
   profileImage?: string;
-  joinDate: string;
+  joinDate?: string;
 }
 
 export interface HealthMetric {
