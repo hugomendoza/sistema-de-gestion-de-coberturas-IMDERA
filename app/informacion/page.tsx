@@ -27,7 +27,7 @@ import { mockClasses } from "@/lib/mock-data";
 import { ClassCard } from "@/components/shared/class-card";
 
 // Función para obtener los días de la semana actual
-export function getWeekDays(date: Date): Date[] {
+function getWeekDays(date: Date): Date[] {
   const start = startOfWeek(date, { weekStartsOn: 1 }); // Lunes como primer día de la semana
   return Array.from({ length: 7 }, (_, i) => addDays(start, i));
 }
