@@ -7,6 +7,31 @@ export interface User {
   role: UserRole;
   profileImage?: string;
   joinDate?: string;
+  gender?: 'masculino' | 'femenino';
+  birthDate?: string; // Formato: YYYY-MM-DD
+}
+
+export interface WeightMetrics {
+  date: string;
+  weight: number; // kg
+  height: number; // cm
+  bmi: number;
+  bodyFatPercentage: number;
+  waistCircumference?: number; // cm
+  hipCircumference?: number; // cm
+  notes?: string;
+}
+
+export interface StudentMetrics extends WeightMetrics {
+  studentId: string;
+  age: number;
+  gender: 'masculino' | 'femenino';
+  bmiCategory: 'bajo_peso' | 'normal' | 'sobrepeso' | 'obesidad';
+  progress: {
+    weightChange: number; // %
+    bmiChange: number; // %
+    bodyFatChange: number; // %
+  };
 }
 
 export interface HealthMetric {
@@ -58,11 +83,57 @@ export interface Project {
   totalStudents: number;
 }
 
+export interface OverweightMetrics {
+  totalStudents: number;
+  byGender: {
+    male: {
+      total: number;
+      normal: number;
+      overweight: number;
+      obesity: number;
+    };
+    female: {
+      total: number;
+      normal: number;
+      overweight: number;
+      obesity: number;
+    };
+  };
+  byAgeGroup: {
+    [key: string]: {
+      total: number;
+      normal: number;
+      overweight: number;
+      obesity: number;
+    };
+  };
+  monthlyTrends: Array<{
+    month: string;
+    normal: number;
+    overweight: number;
+    obesity: number;
+  }>;
+}
+
 export interface Statistics {
   totalStudents: number;
+  activeStudents: number;
+  completionRate: number;
+  totalCourses: number;
   activeCourses: number;
-  benefitsGranted: number;
+  upcomingCourses: number;
   attendanceRate: number;
+  studentSatisfaction: number;
+  genderDistribution: {
+    male: number;
+    female: number;
+    other: number;
+  };
+  ageDistribution: {
+    [key: string]: number;
+  };
+  overweightMetrics: OverweightMetrics;
+  benefitsGranted: number;
 }
 
 export interface AttendanceData {
