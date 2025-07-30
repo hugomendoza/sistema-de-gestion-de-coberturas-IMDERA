@@ -4,9 +4,12 @@ import { useState } from 'react';
 import { Sidebar } from './sidebar';
 import { StatisticsTab } from './statistics-tab';
 import { ProjectsTab } from './projects-tab';
+import { ProfileTab } from './profile-tab';
+import { useAuth } from '@/contexts/auth-context';
 
 export function DashboardLayout() {
   const [activeTab, setActiveTab] = useState('statistics');
+  const { user } = useAuth();
 
   const renderContent = () => {
     switch (activeTab) {
@@ -14,6 +17,8 @@ export function DashboardLayout() {
         return <StatisticsTab />;
       case 'projects':
         return <ProjectsTab />;
+      case 'profile':
+        return <ProfileTab />;
       default:
         return <StatisticsTab />;
     }

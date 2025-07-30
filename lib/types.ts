@@ -1,8 +1,35 @@
+export type UserRole = 'promotor' | 'instructor' | 'admin';
+
 export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'promotor';
+  role: UserRole;
+  profileImage?: string;
+  joinDate: string;
+}
+
+export interface HealthMetric {
+  date: string;
+  weight: number; // kg
+  bodyFatPercentage: number; // %
+  energyLevel: number; // 1-10
+  sleepHours: number;
+  stressLevel: number; // 1-10
+  notes?: string;
+}
+
+export interface HealthSummary {
+  currentWeight: number;
+  weightChange: number; // %
+  avgSleep: number;
+  avgEnergy: number;
+  lastMeasurement: string;
+  progress: {
+    weight: number[];
+    bodyFat: number[];
+    dates: string[];
+  };
 }
 
 export interface Student {

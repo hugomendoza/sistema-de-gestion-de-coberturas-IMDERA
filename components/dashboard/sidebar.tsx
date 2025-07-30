@@ -38,6 +38,11 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
       label: 'Proyectos',
       icon: FolderOpen,
     },
+    {
+      id: 'profile',
+      label: 'Mi Perfil',
+      icon: User,
+    },
   ];
 
   const toggleSidebar = () => {
