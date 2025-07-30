@@ -62,6 +62,8 @@ export interface Student {
   name: string;
   phone: string;
   confirmedAttendance: boolean;
+  gender:  "masculino" | "femenino";
+  birthDate: string;
 }
 
 export interface Class {
