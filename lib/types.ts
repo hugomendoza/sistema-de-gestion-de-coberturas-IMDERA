@@ -66,13 +66,21 @@ export interface Student {
   birthDate: string;
 }
 
+export interface Instructor {
+  id: string;
+  name: string;
+  specialty: string;
+}
+
 export interface Class {
   id: string;
   name: string;
-  date: string;
-  time: string;
+  date: string; // Formato YYYY-MM-DD
+  time: string; // Formato HH:MM - HH:MM
+  instructor: Instructor;
   location: string;
   studentCount: number;
+  maxStudents: number;
   status: 'programada' | 'en-curso' | 'completada' | 'cancelada';
   students: Student[];
 }
